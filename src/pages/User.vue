@@ -122,6 +122,13 @@
           <div class="card__content" v-loading="loadingAlbums">
               <pre>
                 {{ listAlbums }}
+                <el-collapse v-model="activeAlbums" accordion>
+                  <el-collapse-item v-for="album in listAlbums" :key="album.id"
+                                    :title="album.title"
+                                    :name="album.id"
+                  >
+                  </el-collapse-item>
+                </el-collapse>
               </pre>
           </div>
         </template>
@@ -165,6 +172,7 @@
             list: null,
           },
         },
+        activeAlbums: '',
       };
     },
     computed: {
