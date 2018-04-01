@@ -8,3 +8,26 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.grid-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    padding: 0 20px;
+  }
+}
+
+.grid-row {}
+
+.grid-col {}
+
+.main-header {
+  padding: 0;
+  background-color: #545c64;
+}
+
+.main-content {
+
+}

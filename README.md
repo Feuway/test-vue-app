@@ -1,6 +1,6 @@
 # performance-optimization
 
-> A Vue.js project
+> Optimization Performance Test App on Vue.js
 
 ## Build Setup
 

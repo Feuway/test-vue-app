@@ -21,8 +21,8 @@ export default {
   actions: {
     async fetchListPosts({ getters, commit }) {
       if (getters.listPosts.length === 0) {
-        const response = await HTTP.get('posts');
-        commit(types.SET_LIST_POSTS, response.data);
+        const response = await HTTP.get('posts?q=dignissimos');
+        commit(types.SET_LIST_POSTS, { list: response.data });
       }
     },
   },
