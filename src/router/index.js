@@ -26,14 +26,16 @@ export default new Router({
       component: Posts,
     },
     {
-      path: '/post',
+      path: '/post-:id',
       name: 'Post',
       component: Post,
+      props: true,
     },
     {
-      path: '/user',
+      path: '/user-:id',
       name: 'User',
       component: User,
+      props: true,
     },
     {
       path: '*',

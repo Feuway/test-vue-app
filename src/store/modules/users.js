@@ -23,7 +23,7 @@ export default {
   },
   actions: {
     async fetchListUsers({ getters, commit }) {
-      if (getters.listPosts.length === 0) {
+      if (getters.listUsers.length === 0) {
         const response = await HTTP.get('users');
         commit(types.SET_LIST_USERS, { list: response.data });
       }
