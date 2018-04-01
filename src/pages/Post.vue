@@ -14,6 +14,15 @@
             <p>{{ dataPost.body }}{{ dataPost.body }}</p>
             <p>{{ dataPost.body }}{{ dataPost.body }}{{ dataPost.body }}</p>
             <p>{{ dataPost.body }}</p>
+
+            <el-row class="container">
+              <el-button
+                type="text"
+                @click="$router.push({ name: 'User', params: { id: dataPost.userId }})"
+              >
+                Author
+              </el-button>
+            </el-row>
           </div>
         </el-card>
       </el-col>

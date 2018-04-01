@@ -9,16 +9,16 @@ export default {
     listUsers(state) {
       return state.listUsers;
     },
-    getUserById() {
-      return id => this.listPosts.find(post => post.id === id) || null;
+    getUserById(state) {
+      return id => state.listUsers.find(post => post.id === id) || null;
     },
   },
   mutations: {
     [types.SET_LIST_USERS](state, payload) {
-      state.listPosts = payload.list;
+      state.listUsers = payload.list;
     },
     [types.ADD_DATA_USER_TO_LIST](state, payload) {
-      state.listPosts.push(payload.dataUser);
+      state.listUsers.push(payload.dataUser);
     },
   },
   actions: {
@@ -34,6 +34,21 @@ export default {
         const response = await HTTP.get(`users/${userId}`);
         commit(types.ADD_DATA_USER_TO_LIST, { dataUser: response.data });
       }
+    },
+
+    async fetchPostsUser(context, { userId }) {
+      const response = await HTTP.get(`users/${userId}/posts`);
+      return response.data;
+    },
+
+    async fetchTodosUser(context, { userId }) {
+      const response = await HTTP.get(`users/${userId}/todos`);
+      return response.data;
+    },
+
+    async fetchAlbumsUser(context, { userId }) {
+      const response = await HTTP.get(`users/${userId}/albums`);
+      return response.data;
     },
 
     async searchUserByName(context, { name }) {
