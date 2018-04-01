@@ -15,6 +15,14 @@
             <p>{{ dataPost.body }}{{ dataPost.body }}{{ dataPost.body }}</p>
             <p>{{ dataPost.body }}</p>
 
+            <el-rate
+              v-model="rating"
+              disabled
+              show-score
+              text-color="#ff9900"
+              score-template="{value} points">
+            </el-rate>
+
             <el-row class="container">
               <el-button
                 type="text"
@@ -174,6 +182,11 @@
 
       dataPost() {
         return this.getPostById(Number(this.id));
+      },
+
+      rating() {
+        const rand = Math.random() * 5;
+        return Number(rand.toFixed(1));
       },
     },
     watch: {

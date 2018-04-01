@@ -68,3 +68,15 @@ body {
     text-transform: capitalize;
   }
 }
+
+.card {
+  &__title {
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  &__content {
+    min-height: 200px;
+    padding: 0 20px;
+  }
+}

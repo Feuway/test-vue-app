@@ -48,7 +48,7 @@
           <el-col class="container">
             <el-card v-loading="loadingComments">
               <div slot="header">
-                <h3 style="text-transform: uppercase; margin: 0;">New comments to posts</h3>
+                <h3 class="card__title">New comments to posts</h3>
               </div>
 
               <template v-if="listNewComments">

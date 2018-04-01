@@ -1,15 +1,15 @@
 <template>
 
   <section v-loading.fullscreen="loading">
-    <el-row class="">
+    <el-row>
       <el-collapse-transition>
         <el-card v-if="dataUser">
           <template slot="header">
             <el-row :gutter="20">
-              <el-col :sm="8" class="container">
+              <el-col :sm="6">
                 <img src="http://placehold.it/150" alt="avatar">
               </el-col>
-              <el-col :sm="16" class="container">
+              <el-col :sm="18">
                 <h2>
                   {{ dataUser.name }}
                 </h2>
@@ -21,17 +21,53 @@
           </template>
 
           <template>
-            <el-row style="padding: 0 20px;">
-              <p>E-mail: {{ dataUser.email }}</p>
+            <div class="card__content">
+              <el-row :gutter="20" class="container">
+                <el-col :span="4">
+                  <span>E-mail:</span>
+                </el-col>
+                <el-col :span="20">
+                  <span>{{ dataUser.email }}</span>
+                </el-col>
+              </el-row>
 
-              <p>Address: {{ fullAddress }}</p>
+              <el-row :gutter="20">
+                <el-col :span="4">
+                  <span>Address:</span>
+                </el-col>
+                <el-col :span="20">
+                  <span>{{ fullAddress }}</span>
+                </el-col>
+              </el-row>
 
-              <p>Phone: {{ dataUser.phone }}</p>
+              <el-row :gutter="20" class="container">
+                <el-col :span="4">
+                  <span>Phone:</span>
+                </el-col>
+                <el-col :span="20">
+                  <span>{{ dataUser.phone }}</span>
+                </el-col>
+              </el-row>
 
-              <p>Website: {{ dataUser.website }}</p>
+              <el-row :gutter="20" class="container">
+                <el-col :span="4">
+                  <span>Website:</span>
+                </el-col>
+                <el-col :span="20">
+                  <span>{{ dataUser.website }}</span>
+                </el-col>
+              </el-row>
 
-              <p>Company: {{ fullNameCompany }}</p>
-            </el-row>
+              <el-row :gutter="20" class="container">
+                <el-col :span="4">
+                  <span>Company:</span>
+                </el-col>
+                <el-col :span="20">
+                  <span>{{ fullNameCompany }}</span>
+                </el-col>
+              </el-row>
+
+            </div>
           </template>
         </el-card>
       </el-collapse-transition>
@@ -41,15 +77,18 @@
       <el-col :sm="12">
         <el-card>
           <template slot="header">
-            <h3 style="text-transform: uppercase; margin: 0;">Posts</h3>
+            <h3 class="card__title">Posts</h3>
           </template>
 
           <template>
-            <div style="min-height: 200px" v-loading="loadingPosts">
-              <pre>
-                {{ listPosts }}
-              </pre>
-            </div>
+            <ul class="list" v-loading="loadingPosts">
+              <li v-for="post in listPosts"
+                  :key="post.id"
+                  class="list-item"
+              >
+                <user-post :data="post" />
+              </li>
+            </ul>
           </template>
         </el-card>
       </el-col>
@@ -57,14 +96,16 @@
       <el-col :sm="12">
         <el-card>
           <template slot="header">
-            <h3 style="text-transform: uppercase; margin: 0;">Todos</h3>
+            <h3 class="card__title">Todos</h3>
           </template>
 
           <template>
-            <div style="min-height: 200px" v-loading="loadingTodos">
-              <pre>
-                {{ listTodos }}
-              </pre>
+            <div class="card__content" v-loading="loadingTodos">
+              <user-todo
+                v-for="todo in listTodos"
+                :key="todo.id"
+                :data="todo"
+              />
             </div>
           </template>
         </el-card>
@@ -74,11 +115,11 @@
     <el-row class="container">
       <el-card>
         <template slot="header">
-          <h3 style="text-transform: uppercase; margin: 0;">Albums</h3>
+          <h3 class="card__title">Albums</h3>
         </template>
 
         <template>
-          <div style="min-height: 200px" v-loading="loadingAlbums">
+          <div class="card__content" v-loading="loadingAlbums">
               <pre>
                 {{ listAlbums }}
               </pre>
@@ -92,9 +133,15 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  import UserTodo from '@/components/UserTodo';
+  import UserPost from '@/components/UserPost';
 
   export default {
     name: 'User',
+    components: {
+      UserTodo,
+      UserPost,
+    },
     props: {
       id: {
         type: [String, Number],
