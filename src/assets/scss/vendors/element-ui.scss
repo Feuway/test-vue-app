@@ -1,1 +1,14 @@
 @import '~element-ui/lib/theme-chalk/index.css';
+
+// OVERRIDE
+.el-row {
+  &.container {
+    margin: 20px 0;
+  }
+}
+
+.el-col {
+  &.container {
+    margin-bottom: 20px;
+  }
+}

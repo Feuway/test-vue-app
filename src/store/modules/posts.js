@@ -25,5 +25,15 @@ export default {
         commit(types.SET_LIST_POSTS, { list: response.data });
       }
     },
+
+    async fetchNewPosts() {
+      const response = await HTTP.get('posts?_start=0&_end=5');
+      return response.data;
+    },
+
+    async fetchNewComments() {
+      const response = await HTTP.get('comments?_start=0&_end=5');
+      return response.data;
+    },
   },
 };

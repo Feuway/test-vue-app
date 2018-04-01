@@ -10,7 +10,9 @@
 
       <el-main class="main-content">
         <app-grid-wrap>
-          <router-view />
+          <transition name="slide-Y" mode="out-in">
+            <router-view />
+          </transition>
         </app-grid-wrap>
       </el-main>
     </el-container>

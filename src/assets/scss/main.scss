@@ -1,9 +1,13 @@
 // base
-@import 'base/base';
+@import "base/fonts";
+@import "base/base";
 
 // pages
 
 // components
+
+// utils
+@import "utils/transitions";
 
 // vendors
 @import "vendors/element-ui";

@@ -1,0 +1,16 @@
+.slide-Y {
+  &-enter-active,
+  &-leave-active {
+    transition: all .2s ease-out;
+  }
+
+  &-enter,
+  &-leave-to {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+.list-move {
+  transition: transform 1s;
+}
