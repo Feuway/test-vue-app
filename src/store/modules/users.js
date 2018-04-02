@@ -60,5 +60,14 @@ export default {
       const response = await HTTP.get(`users?name_like=${name}`);
       return response.data;
     },
+
+    fetchUserPermission() {
+      return new Promise((resolve) => {
+        // any async code...
+        setTimeout(() => {
+          resolve('guest');
+        }, 358);
+      });
+    },
   },
 };

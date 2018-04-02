@@ -81,7 +81,7 @@
           </template>
 
           <template>
-            <ul class="list" v-loading="loadingPosts">
+            <ul class="list" style="min-height: 200px" v-loading="loadingPosts">
               <li v-for="post in listPosts"
                   :key="post.id"
                   class="list-item"
@@ -236,6 +236,13 @@
         return this.dataControlLists.todos.loading;
       },
     },
+    watch: {
+      dataUser(val) {
+        if (val) {
+          this.onLoadLists();
+        }
+      },
+    },
     methods: {
       ...mapActions([
         'fetchDataUser',
@@ -311,7 +318,6 @@
       },
     },
     mounted() {
-      this.onLoadLists();
     },
     created() {
       this.onLoadData();

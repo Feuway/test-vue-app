@@ -7,6 +7,7 @@ import Posts from '@/pages/Posts';
 import Post from '@/pages/Post';
 import User from '@/pages/User';
 import Photos from '@/pages/Photos';
+import SearchUsers from '@/pages/SearchUsers';
 import NotFoundPage from '@/pages/404';
 
 // const Dashboard = () => import('@/pages/Dashboard');
@@ -42,6 +43,11 @@ export default new Router({
       path: '/photos',
       name: 'Photos',
       component: Photos,
+    },
+    {
+      path: '/search-users',
+      name: 'SearchUsers',
+      component: SearchUsers,
     },
     {
       path: '*',

@@ -16,3 +16,7 @@
 .el-card__body {
   padding: 0;
 }
+
+.el-message {
+  z-index: 5000 !important;
+}

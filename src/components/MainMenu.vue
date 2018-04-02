@@ -16,7 +16,7 @@
       <el-menu-item index="/photos">
         Photos
       </el-menu-item>
-      <el-menu-item index="/search">
+      <el-menu-item index="/search-users">
         Search
       </el-menu-item>
     </el-menu>
