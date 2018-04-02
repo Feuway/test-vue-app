@@ -6,6 +6,14 @@
           <div slot="header">
             <el-row type="flex" justify="space-between">
               <h2 style="text-transform: uppercase;">All posts</h2>
+
+              <el-button
+                type="text"
+                @click="$router.push({ name: 'AddNewPost' })"
+              >
+                Create post
+                <el-icon name="plus" />
+              </el-button>
             </el-row>
           </div>
 

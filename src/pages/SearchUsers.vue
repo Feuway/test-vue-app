@@ -84,6 +84,7 @@
       ]),
 
       handleFocusInput() {
+        // fetch permission API
       },
 
       async onSearchUsers() {

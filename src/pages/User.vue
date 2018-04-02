@@ -158,6 +158,8 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  // import store from '@/store';
+
   import UserTodo from '@/components/UserTodo';
   import UserPost from '@/components/UserPost';
   import PhotoCard from '@/components/PhotoCard';
@@ -322,6 +324,20 @@
     created() {
       this.onLoadData();
     },
+    //
+    // async beforeRouteEnter(to, from, next) {
+    //   console.log(to);
+    //   const userId = to.params.id;
+    //   await store.dispatch('fetchDataUser', { userId });
+    //   const listPosts = await store.dispatch('fetchPostsUser', { userId });
+    //   const listAlbums = await store.dispatch('fetchAlbumsUser', { userId });
+    //   const listTodos = await store.dispatch('fetchTodosUser', { userId });
+    //   next((vm) => {
+    //     vm.dataControlLists.posts.list = listPosts;
+    //     vm.dataControlLists.albums.list = listAlbums;
+    //     vm.dataControlLists.todos.list = listTodos;
+    //   });
+    // },
   };
 
 </script>

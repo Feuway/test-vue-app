@@ -5,6 +5,7 @@ import Router from 'vue-router';
 import Dashboard from '@/pages/Dashboard';
 import Posts from '@/pages/Posts';
 import Post from '@/pages/Post';
+import AddNewPost from '@/pages/AddNewPost';
 import User from '@/pages/User';
 import Photos from '@/pages/Photos';
 import SearchUsers from '@/pages/SearchUsers';
@@ -32,6 +33,11 @@ export default new Router({
       name: 'Post',
       component: Post,
       props: true,
+    },
+    {
+      path: '/add-new-post',
+      name: 'AddNewPost',
+      component: AddNewPost,
     },
     {
       path: '/user-:id',
