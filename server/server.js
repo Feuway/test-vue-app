@@ -22,8 +22,9 @@ app.get('/', (req, res) => {
   res.sendFile(`${frontPath}/index.html`);
 });
 
-app.post('/uploads', upload.single('file'), () => {
+app.post('/uploads', upload.single('file'), (req, res) => {
   console.log('Upload!!!');
+  res.send(JSON.stringify({ id: 1 }));
 });
 
 app.use(express.static(frontPath));
