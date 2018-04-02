@@ -13,6 +13,9 @@
       <el-menu-item index="/posts">
         Posts
       </el-menu-item>
+      <el-menu-item index="/photos">
+        Photos
+      </el-menu-item>
       <el-menu-item index="/search">
         Search
       </el-menu-item>
