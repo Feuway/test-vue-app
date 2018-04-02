@@ -51,6 +51,11 @@ export default {
       return response.data;
     },
 
+    async fetchPhotosUser(context, { albumId }) {
+      const response = await HTTP.get(`albums/${albumId}/photos`);
+      return response.data;
+    },
+
     async searchUserByName(context, { name }) {
       const response = await HTTP.get(`users?name_like=${name}`);
       return response.data;

@@ -119,17 +119,35 @@
         </template>
 
         <template>
-          <div class="card__content" v-loading="loadingAlbums">
-              <pre>
-                {{ listAlbums }}
-                <el-collapse v-model="activeAlbums" accordion>
-                  <el-collapse-item v-for="album in listAlbums" :key="album.id"
-                                    :title="album.title"
-                                    :name="album.id"
-                  >
-                  </el-collapse-item>
-                </el-collapse>
-              </pre>
+          <div v-loading="loadingAlbums">
+            <el-collapse v-model="activeAlbums"
+                         accordion
+                         @change="onChangeCollapse"
+            >
+              <el-collapse-item v-for="album in listAlbums" :key="album.id"
+                                :name="album.id"
+              >
+                <template slot="title">
+                  <h4 style="margin: 0; padding: 0 20px; text-transform: capitalize;">
+                    {{ album.title }}
+                  </h4>
+                </template>
+
+                <template>
+                  <div class="card__content">
+                    <el-row :gutter="20" v-loading="loadingPhotos">
+                      <el-col :sm="8"
+                              class="container"
+                              v-for="photo in album.listPhotos"
+                              :key="photo.id"
+                      >
+                        <photo-card :data="photo" />
+                      </el-col>
+                    </el-row>
+                  </div>
+                </template>
+              </el-collapse-item>
+            </el-collapse>
           </div>
         </template>
       </el-card>
@@ -142,12 +160,14 @@
   import { mapGetters, mapActions } from 'vuex';
   import UserTodo from '@/components/UserTodo';
   import UserPost from '@/components/UserPost';
+  import PhotoCard from '@/components/PhotoCard';
 
   export default {
     name: 'User',
     components: {
       UserTodo,
       UserPost,
+      PhotoCard,
     },
     props: {
       id: {
@@ -158,6 +178,7 @@
     data() {
       return {
         loading: false,
+        loadingPhotos: false,
         dataControlLists: {
           posts: {
             loading: false,
@@ -221,7 +242,29 @@
         'fetchPostsUser',
         'fetchAlbumsUser',
         'fetchTodosUser',
+        'fetchPhotosUser',
       ]),
+
+      onChangeCollapse(val) {
+        if (val) {
+          this.loadListPhoto(val);
+        }
+      },
+
+      async loadListPhoto(val) {
+        try {
+          const currentAlbum = this.listAlbums.find(album => album.id === val);
+          if (!currentAlbum.listPhotos) {
+            this.loadingPhotos = true;
+            const listPhotos = await this.fetchPhotosUser({ albumId: val });
+            this.$set(currentAlbum, 'listPhotos', listPhotos);
+          }
+        } catch (e) {
+          console.error(e);
+        } finally {
+          this.loadingPhotos = false;
+        }
+      },
 
       loadList(nameList, cb) {
         const dataList = this.dataControlLists[nameList];
