@@ -43,6 +43,13 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       sourceMap: true
     }),
+    // moment
+    new webpack.ContextReplacementPlugin(
+      /moment[\/\\]locale/,
+      path.resolve(__dirname, './src/locales'),
+      /(en-gb|ru)\.js/,
+    ),
+
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath("css/[name].[contenthash].css")

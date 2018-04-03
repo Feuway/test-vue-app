@@ -7,9 +7,13 @@ import store from './store';
 
 // vendors
 import elementUi from './vendors/element-ui';
+// import moment from './vendors/moment';
+// import lodash from './vendors/lodash';
 
 // use
 Vue.use(elementUi);
+// Vue.use(moment);
+// Vue.use(lodash);
 
 Vue.config.productionTip = false;
 

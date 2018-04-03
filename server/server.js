@@ -1,4 +1,5 @@
 const express = require('express');
+// const compression = require('compression');
 const multer = require('multer');
 const path = require('path');
 
@@ -27,6 +28,7 @@ app.post('/uploads', upload.single('file'), (req, res) => {
   res.send(JSON.stringify({ id: 1 }));
 });
 
+// app.use(compression());
 app.use(express.static(frontPath));
 app.listen(port);
 

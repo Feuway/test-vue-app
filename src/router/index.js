@@ -12,6 +12,8 @@ import SearchUsers from '@/pages/SearchUsers';
 import NotFoundPage from '@/pages/404';
 
 // const Dashboard = () => import('@/pages/Dashboard');
+// const Posts = () => import('@/pages/Posts');
+// const User = () => import('@/pages/User');
 
 Vue.use(Router);
 
