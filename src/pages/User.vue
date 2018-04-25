@@ -160,9 +160,13 @@
   import { mapGetters, mapActions } from 'vuex';
   // import store from '@/store';
 
-  import UserTodo from '@/components/UserTodo';
-  import UserPost from '@/components/UserPost';
-  import PhotoCard from '@/components/PhotoCard';
+  // import UserTodo from '@/components/UserTodo';
+  // import UserPost from '@/components/UserPost';
+  // import PhotoCard from '@/components/PhotoCard';
+
+  const UserTodo = () => import('@/components/UserTodo');
+  const UserPost = () => import('@/components/UserPost');
+  const PhotoCard = () => import('@/components/PhotoCard');
 
   export default {
     name: 'User',

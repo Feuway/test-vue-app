@@ -76,7 +76,29 @@ module.exports = {
       {
         test: /\.(jpg|png|gif|svg)$/,
         loader: 'image-webpack-loader',
-        enforce: 'pre'
+        enforce: 'pre',
+        options: {
+          mozjpeg: {
+            progressive: true,
+            quality: 65,
+          },
+          optipng: {
+            enabled: false,
+          },
+          pngquant: {
+            quality: '65-90',
+            speed: 4,
+          },
+          gifsicle: {
+            interlaced: false,
+          },
+          webp: {
+            quality: 75,
+          },
+          svgo: {
+            removeViewBox: false,
+          },
+        }
       }
     ]
   }

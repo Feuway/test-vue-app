@@ -1,5 +1,5 @@
 const express = require('express');
-// const compression = require('compression');
+const compression = require('compression');
 const multer = require('multer');
 const path = require('path');
 
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
+app.get('/#/', (req, res) => {
   res.sendFile(`${frontPath}/index.html`);
 });
 
@@ -28,8 +28,11 @@ app.post('/uploads', upload.single('file'), (req, res) => {
   res.send(JSON.stringify({ id: 1 }));
 });
 
-// app.use(compression());
-app.use(express.static(frontPath));
+app.use(compression());
+app.use(express.static(frontPath, {
+  etag: false,
+  maxage: '365d',
+}));
 app.listen(port);
 
 const uri = `http://localhost:${port}`;

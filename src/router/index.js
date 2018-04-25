@@ -13,12 +13,17 @@ import NotFoundPage from '@/pages/404';
 
 // const Dashboard = () => import('@/pages/Dashboard');
 // const Posts = () => import('@/pages/Posts');
+// const Post = () => import('@/pages/Post');
+// const AddNewPost = () => import('@/pages/AddNewPost');
 // const User = () => import('@/pages/User');
+// const Photos = () => import('@/pages/Photos');
+// const SearchUsers = () => import('@/pages/SearchUsers');
+// const NotFoundPage = () => import('@/pages/404');
 
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',

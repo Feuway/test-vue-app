@@ -13,7 +13,8 @@
             <p>{{ dataPost.body }}{{ dataPost.body }}</p>
             <p>{{ dataPost.body }}{{ dataPost.body }}</p>
             <p>{{ dataPost.body }}{{ dataPost.body }}{{ dataPost.body }}</p>
-            <p>{{ dataPost.body }}</p>
+            <p>{{ dataPost.body }}</p><p>{{ dataPost.body }}</p><p>{{ dataPost.body }}</p>
+            <p>{{ dataPost.body }}</p><p>{{ dataPost.body }}</p><p>{{ dataPost.body }}</p>
 
             <el-rate
               v-model="rating"
