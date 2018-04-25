@@ -1,14 +1,14 @@
 const express = require('express');
 const compression = require('compression');
-const multer = require('multer');
+// const multer = require('multer');
 const path = require('path');
 
 const frontPath = path.resolve('dist');
 const port = 3000;
 const app = express();
-const upload = multer({
-  dest: '/uploads',
-});
+// const upload = multer({
+//   dest: '/uploads',
+// });
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -23,10 +23,10 @@ app.get('/#/', (req, res) => {
   res.sendFile(`${frontPath}/index.html`);
 });
 
-app.post('/uploads', upload.single('file'), (req, res) => {
-  console.log('Upload!!!');
-  res.send(JSON.stringify({ id: 1 }));
-});
+// app.post('/uploads', upload.single('file'), (req, res) => {
+//   console.log('Upload!!!');
+//   res.send(JSON.stringify({ id: 1 }));
+// });
 
 app.use(compression());
 app.use(express.static(frontPath, {
