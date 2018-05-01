@@ -9,7 +9,6 @@
       :router="true"
       active-text-color="#ffd04b">
       <el-menu-item index="/">Dashboard</el-menu-item>
-      <el-menu-item index="/info" disabled>Info</el-menu-item>
       <el-menu-item index="/posts">
         Posts
       </el-menu-item>

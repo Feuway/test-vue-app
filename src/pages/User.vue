@@ -243,11 +243,11 @@
       },
     },
     watch: {
-      // dataUser(val) {
-      //   if (val) {
-      //     this.onLoadLists();
-      //   }
-      // },
+      dataUser(val) {
+        if (val) {
+          this.onLoadLists();
+        }
+      },
     },
     methods: {
       ...mapActions([
@@ -324,6 +324,7 @@
       },
     },
     mounted() {
+      // this.onLoadLists();
     },
     created() {
       // this.onLoadData();

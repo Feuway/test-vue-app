@@ -28,10 +28,10 @@ app.get('/#/', (req, res) => {
 //   res.send(JSON.stringify({ id: 1 }));
 // });
 
-app.use(compression());
+// app.use(compression());
 app.use(express.static(frontPath, {
   etag: false,
-  maxage: '365d',
+  // maxage: '365d',
 }));
 app.listen(port);
 
