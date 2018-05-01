@@ -158,15 +158,16 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  // import { Collapse, CollapseItem } from 'element-ui';
   // import store from '@/store';
 
-  // import UserTodo from '@/components/UserTodo';
-  // import UserPost from '@/components/UserPost';
-  // import PhotoCard from '@/components/PhotoCard';
+  import UserTodo from '@/components/UserTodo';
+  import UserPost from '@/components/UserPost';
+  import PhotoCard from '@/components/PhotoCard';
 
-  const UserTodo = () => import('@/components/UserTodo');
-  const UserPost = () => import('@/components/UserPost');
-  const PhotoCard = () => import('@/components/PhotoCard');
+  // const UserTodo = () => import('@/components/UserTodo');
+  // const UserPost = () => import('@/components/UserPost');
+  // const PhotoCard = () => import('@/components/PhotoCard');
 
   export default {
     name: 'User',
@@ -322,11 +323,16 @@
           this.loading = false;
         }
       },
+
+      asyncData({ store, route }) {
+        // возвращаем Promise из действия
+        return store.dispatch('fetchDataUser', route.params.id);
+      },
     },
     mounted() {
     },
     created() {
-      this.onLoadData();
+      // this.onLoadData();
     },
     //
     // async beforeRouteEnter(to, from, next) {

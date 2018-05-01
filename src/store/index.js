@@ -7,10 +7,13 @@ import photos from './modules/photos';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  modules: {
-    posts,
-    users,
-    photos,
-  },
-});
+// eslint-disable-next-line import/prefer-default-export
+export function createStore() {
+  return new Vuex.Store({
+    modules: {
+      posts,
+      users,
+      photos,
+    },
+  });
+}
