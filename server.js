@@ -35,6 +35,6 @@ app.use(express.static(frontPath, {
 }));
 app.listen(port);
 
-// const uri = `http://localhost:${port}`;
-// console.log('> Starting node server...');
-// console.log(`> Listening at ${uri}\n`);
+const uri = `http://localhost:${port}`;
+console.log('> Starting node server...');
+console.log(`> Listening at ${uri}\n`);
