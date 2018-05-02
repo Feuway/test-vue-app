@@ -14,8 +14,13 @@
 </template>
 
 <script>
+  import elSwitch from 'element-ui/lib/switch';
+
   export default {
     name: 'UserTodo',
+    components: {
+      elSwitch,
+    },
     props: {
       data: {
         type: Object,

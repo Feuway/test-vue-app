@@ -29,6 +29,8 @@
   import moment from 'moment';
   import 'moment/locale/ru';
 
+  // const moment = () => import('moment');
+
   export default {
     name: 'PhotoCard',
     props: {

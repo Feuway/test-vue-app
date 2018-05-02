@@ -73,8 +73,11 @@
 </template>
 
 <script>
+  import formComponents from '@/utils/mixins/form-components';
+
   export default {
     name: 'AddNewPost',
+    mixins: [formComponents],
     data() {
       return {
         dialogImageUrl: '',

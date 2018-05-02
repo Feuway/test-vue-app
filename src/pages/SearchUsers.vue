@@ -61,12 +61,14 @@
 <script>
   import { mapActions } from 'vuex';
   import UserLink from '@/components/UserLink';
+  import formComponents from '@/utils/mixins/form-components';
 
   export default {
     name: 'SearchUsers',
     components: {
       UserLink,
     },
+    mixins: [formComponents],
     data() {
       return {
         loading: false,

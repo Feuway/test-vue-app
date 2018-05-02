@@ -3,7 +3,7 @@
   <el-row :gutter="20" v-loading="loading">
     <el-col :sm="8"
             class="container"
-            v-for="photo in listPhotos"
+            v-for="photo in listPhotos.slice(0, 100)"
             :key="photo.id"
     >
       <photo-card :data="photo" />

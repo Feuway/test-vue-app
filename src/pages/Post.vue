@@ -139,9 +139,11 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  import formComponents from '@/utils/mixins/form-components';
 
   export default {
     name: 'Post',
+    mixins: [formComponents],
     props: {
       id: {
         type: [String, Number],
