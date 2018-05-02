@@ -37,19 +37,19 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       "process.env": env
     }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false,
-    //     // screw_ie8: true
-    //   },
-    //   sourceMap: true
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true
+      },
+      sourceMap: true
+    }),
     // moment
-    // new webpack.ContextReplacementPlugin(
-    //   /moment[\/\\]locale/,
-    //   path.resolve(__dirname, './src/locales'),
-    //   /(en-gb|ru)\.js/,
-    // ),
+    new webpack.ContextReplacementPlugin(
+      /moment[\/\\]locale/,
+      path.resolve(__dirname, './src/locales'),
+      /(en-gb|ru)\.js/,
+    ),
 
     // extract css into its own file
     new ExtractTextPlugin({
@@ -57,11 +57,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
-    // new OptimizeCSSPlugin({
-    //   cssProcessorOptions: {
-    //     safe: true
-    //   }
-    // }),
+    new OptimizeCSSPlugin({
+      cssProcessorOptions: {
+        safe: true
+      }
+    }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
@@ -71,20 +71,20 @@ const webpackConfig = merge(baseWebpackConfig, {
       template: "index.html",
       inject: true,
       minify: {
-        // removeComments: true,
-        // collapseWhitespace: true,
-        // removeAttributeQuotes: true
-        removeComments: false,
-        collapseWhitespace: false,
-        removeAttributeQuotes: false
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // removeComments: false,
+        // collapseWhitespace: false,
+        // removeAttributeQuotes: false
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: "dependency",
-      // serviceWorkerLoader: `<script>${loadMinified(
-      //   path.join(__dirname, "./service-worker-prod.js")
-      // )}</script>`
+      serviceWorkerLoader: `<script>${loadMinified(
+        path.join(__dirname, "./service-worker-prod.js")
+      )}</script>`
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
@@ -113,13 +113,13 @@ const webpackConfig = merge(baseWebpackConfig, {
       }
     ]),
     // service worker caching
-    // new SWPrecacheWebpackPlugin({
-    //   cacheId: "performance-optimization",
-    //   filename: "service-worker.js",
-    //   staticFileGlobs: ["dist/**/*.{js,html,css}"],
-    //   minify: true,
-    //   stripPrefix: "dist/"
-    // })
+    new SWPrecacheWebpackPlugin({
+      cacheId: "performance-optimization",
+      filename: "service-worker.js",
+      staticFileGlobs: ["dist/**/*.{js,html,css}"],
+      minify: true,
+      stripPrefix: "dist/"
+    })
   ]
 });
 
