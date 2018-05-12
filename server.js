@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const opn = require("opn");
 const LRU = require("lru-cache");
 const express = require("express");
 const compression = require("compression");
@@ -142,6 +141,7 @@ app.listen(port, () => {
     readyPromiseDevServer.then(() => {
       console.log("> Starting node server...");
       console.log(`> Listening at ${uri}\n`);
+      const opn = require("opn");
       opn(uri);
     });
   }
