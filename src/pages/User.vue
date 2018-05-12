@@ -157,197 +157,201 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex';
-  // import { Collapse, CollapseItem } from 'element-ui';
-  // import store from '@/store';
+import { mapGetters, mapActions } from 'vuex';
+// import { Collapse, CollapseItem } from 'element-ui';
+// import store from '@/store';
 
-  import UserTodo from '@/components/UserTodo';
-  import UserPost from '@/components/UserPost';
-  import PhotoCard from '@/components/PhotoCard';
+import UserTodo from '@/components/UserTodo';
+import UserPost from '@/components/UserPost';
+import PhotoCard from '@/components/PhotoCard';
 
-  // const UserTodo = () => import('@/components/UserTodo');
-  // const UserPost = () => import('@/components/UserPost');
-  // const PhotoCard = () => import('@/components/PhotoCard');
+// const UserTodo = () => import('@/components/UserTodo');
+// const UserPost = () => import('@/components/UserPost');
+// const PhotoCard = () => import('@/components/PhotoCard');
 
-  export default {
-    name: 'User',
-    components: {
-      UserTodo,
-      UserPost,
-      PhotoCard,
+export default {
+  name: 'User',
+  components: {
+    UserTodo,
+    UserPost,
+    PhotoCard,
+  },
+  props: {
+    id: {
+      type: [String, Number],
+      required: true,
     },
-    props: {
-      id: {
-        type: [String, Number],
-        required: true,
-      },
-    },
-    data() {
-      return {
-        loading: false,
-        loadingPhotos: false,
-        dataControlLists: {
-          posts: {
-            loading: false,
-            list: null,
-          },
-          albums: {
-            loading: false,
-            list: null,
-          },
-          todos: {
-            loading: false,
-            list: null,
-          },
+  },
+  data() {
+    return {
+      loading: false,
+      loadingPhotos: false,
+      dataControlLists: {
+        posts: {
+          loading: false,
+          list: null,
         },
-        activeAlbums: '',
-      };
+        albums: {
+          loading: false,
+          list: null,
+        },
+        todos: {
+          loading: false,
+          list: null,
+        },
+      },
+      activeAlbums: '',
+    };
+  },
+  computed: {
+    ...mapGetters(['getUserById']),
+
+    dataUser() {
+      return this.getUserById(Number(this.id));
     },
-    computed: {
-      ...mapGetters([
-        'getUserById',
-      ]),
 
-      dataUser() {
-        return this.getUserById(Number(this.id));
-      },
-
-      fullAddress() {
-        const { city, street, suite, zipcode } = this.dataUser.address;
-        return `${city}, ${street}, ${suite}, ${zipcode}`;
-      },
-
-      fullNameCompany() {
-        const { name, catchPhrase, bs } = this.dataUser.company;
-        return `${name} ("${catchPhrase}"), ${bs}`;
-      },
-
-      listPosts() {
-        return this.dataControlLists.posts.list;
-      },
-      loadingPosts() {
-        return this.dataControlLists.posts.loading;
-      },
-
-      listAlbums() {
-        return this.dataControlLists.albums.list;
-      },
-      loadingAlbums() {
-        return this.dataControlLists.albums.loading;
-      },
-
-      listTodos() {
-        return this.dataControlLists.todos.list;
-      },
-      loadingTodos() {
-        return this.dataControlLists.todos.loading;
-      },
+    fullAddress() {
+      const { city, street, suite, zipcode } = this.dataUser.address;
+      return `${city}, ${street}, ${suite}, ${zipcode}`;
     },
-    watch: {
-      dataUser(val) {
-        if (val) {
-          this.onLoadLists();
-        }
-      },
+
+    fullNameCompany() {
+      const { name, catchPhrase, bs } = this.dataUser.company;
+      return `${name} ("${catchPhrase}"), ${bs}`;
     },
-    methods: {
-      ...mapActions([
-        'fetchDataUser',
-        'fetchPostsUser',
-        'fetchAlbumsUser',
-        'fetchTodosUser',
-        'fetchPhotosUser',
-      ]),
 
-      onChangeCollapse(val) {
-        if (val) {
-          this.loadListPhoto(val);
+    listPosts() {
+      return this.dataControlLists.posts.list;
+    },
+    loadingPosts() {
+      return this.dataControlLists.posts.loading;
+    },
+
+    listAlbums() {
+      return this.dataControlLists.albums.list;
+    },
+    loadingAlbums() {
+      return this.dataControlLists.albums.loading;
+    },
+
+    listTodos() {
+      return this.dataControlLists.todos.list;
+    },
+    loadingTodos() {
+      return this.dataControlLists.todos.loading;
+    },
+  },
+  watch: {
+    dataUser(val) {
+      if (val) {
+        this.onLoadLists();
+      }
+    },
+  },
+  methods: {
+    ...mapActions([
+      'fetchDataUser',
+      'fetchPostsUser',
+      'fetchAlbumsUser',
+      'fetchTodosUser',
+      'fetchPhotosUser',
+    ]),
+
+    onChangeCollapse(val) {
+      if (val) {
+        this.loadListPhoto(val);
+      }
+    },
+
+    async loadListPhoto(val) {
+      try {
+        const currentAlbum = this.listAlbums.find(album => album.id === val);
+        if (!currentAlbum.listPhotos) {
+          this.loadingPhotos = true;
+          const listPhotos = await this.fetchPhotosUser({ albumId: val });
+          this.$set(currentAlbum, 'listPhotos', listPhotos);
         }
-      },
+      } catch (e) {
+        console.error(e);
+      } finally {
+        this.loadingPhotos = false;
+      }
+    },
 
-      async loadListPhoto(val) {
-        try {
-          const currentAlbum = this.listAlbums.find(album => album.id === val);
-          if (!currentAlbum.listPhotos) {
-            this.loadingPhotos = true;
-            const listPhotos = await this.fetchPhotosUser({ albumId: val });
-            this.$set(currentAlbum, 'listPhotos', listPhotos);
-          }
-        } catch (e) {
-          console.error(e);
-        } finally {
-          this.loadingPhotos = false;
-        }
-      },
-
-      loadList(nameList, cb) {
-        const dataList = this.dataControlLists[nameList];
-        dataList.loading = true;
-        return cb()
-          .then((list) => {
-            dataList.list = list;
-          })
-          .catch((err) => {
-            this.$alert({
-              type: 'error',
-              message: err.message,
-            });
-          })
-          .finally(() => {
-            dataList.loading = false;
+    loadList(nameList, cb) {
+      const dataList = this.dataControlLists[nameList];
+      dataList.loading = true;
+      return cb()
+        .then((list) => {
+          dataList.list = list;
+        })
+        .catch((err) => {
+          this.$alert({
+            type: 'error',
+            message: err.message,
           });
-      },
-
-      async onLoadLists() {
-        try {
-          const { loadList } = this;
-          await Promise.all([
-            loadList('posts', this.fetchPostsUser.bind(this, { userId: this.id })),
-            loadList('albums', this.fetchAlbumsUser.bind(this, { userId: this.id })),
-            loadList('todos', this.fetchTodosUser.bind(this, { userId: this.id })),
-          ]);
-        } catch (e) {
-          console.error(e);
-        } finally {
-          this.loading = false;
-        }
-      },
-
-      async onLoadData() {
-        try {
-          this.loading = true;
-          await this.fetchDataUser({ userId: this.id });
-        } catch (e) {
-          console.error(e);
-        } finally {
-          this.loading = false;
-        }
-      },
-
-      asyncData({ store, route }) {
-        // возвращаем Promise из действия
-        return store.dispatch('fetchDataUser', route.params.id);
-      },
+        })
+        .finally(() => {
+          dataList.loading = false;
+        });
     },
-    mounted() {
-    },
-    created() {
-      // this.onLoadData();
-    },
-    //
-    // async beforeRouteEnter(to, from, next) {
-    //   console.log(to);
-    //   const userId = to.params.id;
-    //   await store.dispatch('fetchDataUser', { userId });
-    //   const listPosts = await store.dispatch('fetchPostsUser', { userId });
-    //   const listAlbums = await store.dispatch('fetchAlbumsUser', { userId });
-    //   const listTodos = await store.dispatch('fetchTodosUser', { userId });
-    //   next((vm) => {
-    //     vm.dataControlLists.posts.list = listPosts;
-    //     vm.dataControlLists.albums.list = listAlbums;
-    //     vm.dataControlLists.todos.list = listTodos;
-    //   });
-    // },
-  };
 
+    async onLoadLists() {
+      try {
+        const { loadList } = this;
+        await Promise.all([
+          loadList(
+            'posts',
+            this.fetchPostsUser.bind(this, { userId: this.id }),
+          ),
+          loadList(
+            'albums',
+            this.fetchAlbumsUser.bind(this, { userId: this.id }),
+          ),
+          loadList('todos', this.fetchTodosUser.bind(this, { userId: this.id })),
+        ]);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async onLoadData() {
+      try {
+        this.loading = true;
+        await this.fetchDataUser({ userId: this.id });
+      } catch (e) {
+        console.error(e);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    asyncData({ store, route }) {
+      // возвращаем Promise из действия
+      return store.dispatch('fetchDataUser', route.params.id);
+    },
+  },
+  mounted() {
+    this.onLoadData();
+  },
+  created() {
+    // this.onLoadData();
+  },
+  //
+  // async beforeRouteEnter(to, from, next) {
+  //   console.log(to);
+  //   const userId = to.params.id;
+  //   await store.dispatch('fetchDataUser', { userId });
+  //   const listPosts = await store.dispatch('fetchPostsUser', { userId });
+  //   const listAlbums = await store.dispatch('fetchAlbumsUser', { userId });
+  //   const listTodos = await store.dispatch('fetchTodosUser', { userId });
+  //   next((vm) => {
+  //     vm.dataControlLists.posts.list = listPosts;
+  //     vm.dataControlLists.albums.list = listAlbums;
+  //     vm.dataControlLists.todos.list = listTodos;
+  //   });
+  // },
+};
 </script>

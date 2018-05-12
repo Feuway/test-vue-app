@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle,consistent-return */
 
-import { createApp } from './app';
+import { createApp } from './main';
 
 const { app, router, store } = createApp();
 
@@ -38,5 +38,6 @@ router.onReady(() => {
 
 // service worker
 if (location.protocol === 'https:' && navigator.serviceWorker) {
+  console.log('service worker register');
   navigator.serviceWorker.register('/service-worker.js');
 }

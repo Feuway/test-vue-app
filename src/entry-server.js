@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import { createApp } from './app';
+import { createApp } from './main';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
