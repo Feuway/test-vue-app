@@ -180,6 +180,10 @@
         }
       },
     },
+    asyncData({ store }) {
+      store.dispatch('fetchNewPosts');
+      store.dispatch('fetchNewComments');
+    },
     created() {
       this.onLoadData();
     },
