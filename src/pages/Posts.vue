@@ -1,8 +1,8 @@
 <template>
 
-  <section v-loading.fullscreen="loading">
+  <section>
     <el-row :gutter="20">
-        <el-card v-loading="loading">
+        <el-card>
           <div slot="header">
             <el-row type="flex" justify="space-between">
               <h2 style="text-transform: uppercase;">All posts</h2>

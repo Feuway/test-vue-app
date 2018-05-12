@@ -159,18 +159,14 @@
 <script>
   import { mapGetters, mapActions } from 'vuex';
   import store from '@/store';
-
   // import UserTodo from '@/components/UserTodo';
   // import UserPost from '@/components/UserPost';
   // import PhotoCard from '@/components/PhotoCard';
-
   const UserTodo = () => import('@/components/UserTodo');
   const UserPost = () => import('@/components/UserPost');
   const PhotoCard = () => import('@/components/PhotoCard');
-
   const elCollapse = () => import('element-ui/lib/collapse');
   const elCollapseItem = () => import('element-ui/lib/collapse-item');
-
   export default {
     name: 'User',
     components: {
@@ -211,35 +207,29 @@
       ...mapGetters([
         'getUserById',
       ]),
-
       dataUser() {
         return this.getUserById(Number(this.id));
       },
-
       fullAddress() {
         const { city, street, suite, zipcode } = this.dataUser.address;
         return `${city}, ${street}, ${suite}, ${zipcode}`;
       },
-
       fullNameCompany() {
         const { name, catchPhrase, bs } = this.dataUser.company;
         return `${name} ("${catchPhrase}"), ${bs}`;
       },
-
       listPosts() {
         return this.dataControlLists.posts.list;
       },
       loadingPosts() {
         return this.dataControlLists.posts.loading;
       },
-
       listAlbums() {
         return this.dataControlLists.albums.list;
       },
       loadingAlbums() {
         return this.dataControlLists.albums.loading;
       },
-
       listTodos() {
         return this.dataControlLists.todos.list;
       },
@@ -262,13 +252,11 @@
         'fetchTodosUser',
         'fetchPhotosUser',
       ]),
-
       onChangeCollapse(val) {
         if (val) {
           this.loadListPhoto(val);
         }
       },
-
       async loadListPhoto(val) {
         try {
           const currentAlbum = this.listAlbums.find(album => album.id === val);
@@ -283,7 +271,6 @@
           this.loadingPhotos = false;
         }
       },
-
       loadList(nameList, cb) {
         const dataList = this.dataControlLists[nameList];
         dataList.loading = true;
@@ -301,7 +288,6 @@
             dataList.loading = false;
           });
       },
-
       async onLoadLists() {
         try {
           const { loadList } = this;
@@ -316,7 +302,6 @@
           this.loading = false;
         }
       },
-
       async onLoadData() {
         try {
           this.loading = true;
@@ -329,12 +314,11 @@
       },
     },
     mounted() {
-      // this.onLoadLists();
+      this.onLoadLists();
     },
     created() {
       // this.onLoadData();
     },
-
     async beforeRouteEnter(to, from, next) {
       console.log(to);
       const userId = to.params.id;
@@ -349,5 +333,4 @@
       });
     },
   };
-
 </script>
